@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Quant night-meadow theme — dark teal, kHYPE green accents */
+    --background: 190 32% 7%;
+    --foreground: 150 24% 92%;
+    --card: 186 30% 10%;
+    --card-foreground: 150 24% 92%;
+    --popover: 186 34% 9%;
+    --popover-foreground: 150 24% 92%;
+    --primary: 175 60% 45%;
+    --primary-foreground: 190 40% 6%;
+    --secondary: 187 24% 16%;
+    --secondary-foreground: 150 24% 88%;
+    --muted: 187 20% 15%;
+    --muted-foreground: 168 12% 62%;
+    --accent: 43 85% 63%;
+    --accent-foreground: 40 60% 8%;
+    --destructive: 8 70% 52%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 187 22% 18%;
+    --input: 187 22% 20%;
+    --ring: 175 60% 45%;
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-pixel {
+    font-family: 'Silkscreen', 'Courier New', monospace;
+  }
+  .pixelated {
+    image-rendering: pixelated;
+  }
+  /* chunky pixel-panel border used across cards and modals */
+  .pixel-panel {
+    @apply rounded-xl border border-[#2a4547] bg-card shadow-[0_4px_0_0_rgba(0,0,0,0.35)];
+  }
+  .pixel-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border-b-4 font-pixel text-[11px] uppercase tracking-wider transition-all active:translate-y-[2px] active:border-b-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+}
+
+/* reduced motion: kill CSS animation too (PRD FR-4) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

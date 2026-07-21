@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quant — VC Demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face{font-family:"Silkscreen";src:url("assets/fonts/font-1.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+    @font-face{font-family:"Silkscreen";src:url("assets/fonts/font-2.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
+    @font-face{font-family:"Space Grotesk";src:url("assets/fonts/font-3.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap}
+    @font-face{font-family:"Space Grotesk";src:url("assets/fonts/font-4.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+    @font-face{font-family:"Space Grotesk";src:url("assets/fonts/font-5.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
+    *{box-sizing:border-box}html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#071416;color:#e8f2e4;font-family:"Space Grotesk",system-ui,sans-serif}.root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#071416}.scene{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;background-color:#071416}.scene:not(#scene1){opacity:0}.content{width:100%;height:100%;padding:92px 120px;display:flex;flex-direction:column;position:relative;z-index:3}.pixel{font-family:"Silkscreen","Courier New",monospace;text-transform:uppercase;letter-spacing:.07em}.eyebrow{font-size:20px;color:#5fd08a}.headline{font-size:104px;line-height:.98;letter-spacing:-.045em;font-weight:700;max-width:1500px;margin:30px 0 24px}.sub{font-size:32px;line-height:1.38;color:#b8cbc4;max-width:1160px;font-weight:350}.green{color:#5fd08a}.gold{color:#f2c14e}.teal{color:#2fa4a8}.rule{height:3px;width:240px;background:#5fd08a;margin-top:28px}.grain{position:absolute;inset:0;opacity:.16;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");pointer-events:none;z-index:8}.glow{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(47,164,168,.18),rgba(47,164,168,0) 66%);right:-220px;top:-280px}.meta{position:absolute;left:120px;right:120px;bottom:46px;display:flex;justify-content:space-between;color:#7f9d92;font-size:18px;z-index:5}.chip{border:2px solid #28463f;background:#0d211b;border-radius:999px;padding:13px 20px;font-size:18px;color:#bfe3d0;display:inline-flex;align-items:center;gap:12px}.dot{width:10px;height:10px;border-radius:50%;background:#5fd08a;box-shadow:0 0 20px #5fd08a}.world-card{position:absolute;right:112px;top:115px;width:690px;height:850px;border:3px solid #2a4547;border-radius:28px;overflow:hidden;background:#0d211b;box-shadow:0 34px 100px rgba(0,0,0,.45)}.world-card img{width:100%;height:100%;object-fit:cover}.world-card:after{content:"LIVE POSITION → LIVING WORLD";position:absolute;left:30px;right:30px;bottom:28px;padding:18px 22px;border:2px solid #34564e;border-radius:12px;background:rgba(7,20,22,.88);font:18px "Silkscreen",monospace;color:#bfe3d0}.split{display:grid;grid-template-columns:1fr 760px;gap:70px;align-items:center;height:100%}.problem-card{margin-top:44px;width:780px;border:2px solid #29463e;border-radius:20px;background:#0d211b;padding:32px}.token-row{display:flex;align-items:end;justify-content:space-between;border-bottom:1px solid #28463f;padding:18px 0}.token-label{font-size:20px;color:#91aaa1}.token-val{font-size:42px;font-weight:700;font-variant-numeric:tabular-nums}.flat{color:#f2c14e}.map-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:24px;margin-top:42px}.map-card{min-height:320px;border:2px solid #29463e;border-radius:22px;background:#0d211b;padding:30px;position:relative;overflow:hidden}.map-card:first-child{background:#10291e}.map-icon{font-size:62px}.map-title{font:20px "Silkscreen",monospace;color:#d8efe2;margin:18px 0}.map-copy{font-size:23px;line-height:1.35;color:#9fb6ad}.bar{height:12px;background:#1c3931;border-radius:99px;overflow:hidden;margin-top:28px}.bar span{display:block;height:100%;width:78%;background:#5fd08a}.stat-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}.stat{border-top:3px solid #2fa4a8;padding-top:18px}.stat b{display:block;font-size:44px;font-variant-numeric:tabular-nums}.stat small{font-size:18px;color:#91aaa1}.trust-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:center;height:100%}.shield{height:680px;border:3px solid #31574d;border-radius:34px;background:#0d211b;padding:52px;display:flex;flex-direction:column;justify-content:center;position:relative}.shield:before{content:"READ ONLY";position:absolute;right:30px;top:28px;font:18px "Silkscreen",monospace;color:#5fd08a}.trust-row{display:flex;gap:22px;align-items:center;padding:24px 0;border-bottom:1px solid #28463f;font-size:27px}.check{width:38px;height:38px;border-radius:50%;background:#5fd08a;color:#071416;display:grid;place-items:center;font-weight:900}.vision{justify-content:center}.vision .headline{font-size:118px;max-width:1540px}.thesis{display:flex;gap:16px;margin-top:38px}.thesis span{border:2px solid #34564e;border-radius:12px;background:#0d211b;padding:16px 22px;font:18px "Silkscreen",monospace;color:#bfe3d0}.mascot{position:absolute;right:120px;bottom:70px;width:340px;filter:drop-shadow(0 28px 40px rgba(0,0,0,.5))}.pixel-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(95,208,138,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(95,208,138,.045) 1px,transparent 1px);background-size:48px 48px}.accent-box{position:absolute;border:2px solid #2a4547;width:180px;height:180px;transform:rotate(14deg);right:520px;bottom:130px}.cta{font-size:27px;color:#b8cbc4;margin-top:22px}.scene-num{font-variant-numeric:tabular-nums}
+    #scene1 .headline{font-size:88px;margin-top:24px;margin-bottom:18px}#scene1 .sub{font-size:28px}.problem-card{margin-top:24px;padding:18px 28px}.token-row{padding:11px 0}.token-label{font-size:18px}.token-val{font-size:36px}
+  </style>
+</head>
+<body>
+<div id="root" class="root" data-composition-id="quant-vc-demo" data-width="1920" data-height="1080" data-start="0" data-duration="40">
+  <div id="scene1" class="scene" data-layout-allow-overlap data-layout-allow-overflow>
+    <div class="pixel-grid"></div><div class="glow" data-layout-ignore></div>
+    <div class="content split">
+      <div>
+        <div id="s1-chip" class="chip"><span class="dot"></span> Built for Kinetiq on HyperEVM</div>
+        <h1 id="s1-title" class="headline">Staking is working.<br><span class="green">It just doesn’t feel alive.</span></h1>
+        <p id="s1-sub" class="sub">Users see a flat token balance while value accrues invisibly in an exchange rate. The product is financially active—yet emotionally silent.</p>
+        <div id="s1-rule" class="rule"></div>
+        <div id="s1-problem" class="problem-card">
+          <div class="token-row"><span class="token-label pixel">kHYPE balance</span><b class="token-val flat">1,250.00</b></div>
+          <div class="token-row"><span class="token-label pixel">represented HYPE</span><b class="token-val green">1,296.84 ↑</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="meta"><span>QUANT / INVESTOR DEMO</span><span class="scene-num">01 — THE GAP</span></div>
+  </div>
+
+  <div id="scene2" class="scene" data-layout-allow-overlap data-layout-allow-overflow>
+    <div class="pixel-grid"></div><div class="glow" data-layout-ignore style="right:auto;left:-260px;top:220px"></div>
+    <div class="content split">
+      <div>
+        <div id="s2-eye" class="eyebrow pixel">The product reveal</div>
+        <h2 id="s2-title" class="headline">Watch your <span class="green">HYPE</span><br>go to work.</h2>
+        <p id="s2-sub" class="sub">Quant turns every wallet’s Kinetiq position into a deterministic 2D settlement—giving invisible financial progress a place, a crew, and a story.</p>
+        <div id="s2-stats" class="stat-strip">
+          <div class="stat"><b class="green">1:1</b><small>position → unique world</small></div>
+          <div class="stat"><b class="gold">0</b><small>transactions required</small></div>
+          <div class="stat"><b class="teal">24/7</b><small>public-chain visibility</small></div>
+        </div>
+      </div>
+      <div id="s2-world" class="world-card" data-layout-allow-overflow><img src="assets/mascot-hero.png" alt="Quant mascot world" crossorigin="anonymous"></div>
+    </div>
+    <div class="meta"><span>FROM POSITION TO PLACE</span><span class="scene-num">02 — QUANT</span></div>
+  </div>
+
+  <div id="scene3" class="scene" data-layout-allow-overlap data-layout-allow-overflow>
+    <div class="pixel-grid"></div>
+    <div class="content">
+      <div id="s3-eye" class="eyebrow pixel">Every pixel means something</div>
+      <h2 id="s3-title" class="headline" style="font-size:82px;margin-bottom:4px">A visual layer for <span class="green">on-chain comprehension.</span></h2>
+      <div class="map-grid">
+        <div id="map1" class="map-card"><div class="map-icon">🌱</div><div class="map-title">Staking field = kHYPE</div><div class="map-copy">Position size grows a richer settlement tier while keeping the world performant.</div><div class="bar"><span></span></div></div>
+        <div id="map2" class="map-card"><div class="map-icon">📦</div><div class="map-title">Crates = idle HYPE</div><div class="map-copy">Unstaked capacity becomes visible without turning the experience into financial advice.</div></div>
+        <div id="map3" class="map-card"><div class="map-icon">📜</div><div class="map-title">Away report = change</div><div class="map-copy">Local snapshots explain what changed while users were away—clearly and neutrally.</div></div>
+      </div>
+      <div id="s3-line" class="rule" style="width:100%;background:#28463f"></div>
+      <p id="s3-foot" class="sub" style="font-size:25px;margin-top:22px">Retention comes from understanding, identity, and return rituals—not from encouraging more trades.</p>
+    </div>
+    <div class="meta"><span>PRODUCT LOOP: SEE → UNDERSTAND → RETURN</span><span class="scene-num">03 — MECHANICS</span></div>
+  </div>
+
+  <div id="scene4" class="scene" data-layout-allow-overlap data-layout-allow-overflow>
+    <div class="glow" data-layout-ignore style="right:-120px;top:160px"></div>
+    <div class="content trust-grid">
+      <div>
+        <div id="s4-eye" class="eyebrow pixel">Trust by construction</div>
+        <h2 id="s4-title" class="headline" style="font-size:86px">Designed to earn attention <span class="green">without asking for custody.</span></h2>
+        <p id="s4-sub" class="sub">The MVP reads public on-chain data and translates mechanics faithfully. It never invents yield, promises returns, or asks users to sign.</p>
+      </div>
+      <div id="s4-shield" class="shield">
+        <div class="trust-row"><span class="check">✓</span><span>No signatures</span></div>
+        <div class="trust-row"><span class="check">✓</span><span>No transactions</span></div>
+        <div class="trust-row"><span class="check">✓</span><span>No seed phrases</span></div>
+        <div class="trust-row"><span class="check">✓</span><span>Deterministic worlds</span></div>
+        <div class="trust-row"><span class="check">✓</span><span>Claims grounded in chain data</span></div>
+      </div>
+    </div>
+    <div class="meta"><span>PUBLIC DATA / PRIVATE CONFIDENCE</span><span class="scene-num">04 — TRUST</span></div>
+  </div>
+
+  <div id="scene5" class="scene" data-layout-allow-overlap data-layout-allow-overflow>
+    <div class="pixel-grid"></div><div class="glow" data-layout-ignore style="width:1300px;height:1300px;right:-260px;top:-100px"></div><div class="accent-box"></div>
+    <div class="content vision">
+      <div id="s5-eye" class="eyebrow pixel">The wedge is staking comprehension</div>
+      <h2 id="s5-title" class="headline">The opportunity is a <span class="green">living interface</span> for on-chain finance.</h2>
+      <p id="s5-sub" class="sub">Quant makes passive positions legible, personal, and worth returning to—starting with Kinetiq.</p>
+      <div id="s5-thesis" class="thesis"><span>Comprehension</span><span>Retention</span><span>Identity</span><span>Expansion</span></div>
+      <p id="s5-cta" class="cta pixel">QUANT — MAKE THE INVISIBLE FEEL ALIVE.</p>
+      <img id="s5-mascot" class="mascot" src="assets/mascot-portrait.png" alt="Quant mascot" crossorigin="anonymous">
+    </div>
+    <div class="meta"><span>VC DEMO / JULY 2026</span><span class="scene-num">05 — THE VISION</span></div>
+  </div>
+  <div class="grain" data-layout-ignore></div>
+</div>
+
+<script>
+  window.__timelines=window.__timelines||{};
+  const tl=gsap.timeline({paused:true});
+  const from=(sel,vars,t)=>tl.from(sel,vars,t);
+  // Scene 1 build
+  from('#s1-chip',{x:-50,opacity:0,duration:.55,ease:'expo.out'},.2);
+  from('#s1-title',{y:70,opacity:0,duration:.85,ease:'power4.out'},.45);
+  from('#s1-sub',{x:45,opacity:0,duration:.65,ease:'sine.out'},.9);
+  from('#s1-rule',{scaleX:0,transformOrigin:'left',duration:.45,ease:'back.out(1.4)'},1.1);
+  from('#s1-problem',{y:55,scale:.97,opacity:0,duration:.7,ease:'power3.out'},1.3);
+  from('#scene1 .token-row',{x:-25,opacity:0,duration:.5,stagger:.14,ease:'circ.out'},1.65);
+  tl.to('#scene1 .glow',{scale:1.08,duration:6.2,ease:'sine.inOut'},.2);
+  // Push to scene 2
+  tl.to('#scene1',{x:-1920,duration:.55,ease:'power3.inOut'},7.3);
+  tl.fromTo('#scene2',{x:1920,opacity:1},{x:0,duration:.55,ease:'power3.inOut'},7.3);
+  from('#s2-eye',{x:-38,opacity:0,duration:.45,ease:'expo.out'},7.55);
+  from('#s2-title',{letterSpacing:'.02em',opacity:0,duration:.75,ease:'power4.out'},7.75);
+  from('#s2-sub',{y:38,opacity:0,duration:.55,ease:'sine.out'},8.15);
+  from('#s2-world',{x:120,rotation:2,opacity:0,duration:.85,ease:'back.out(1.15)'},7.7);
+  from('#s2-stats .stat',{scale:.88,opacity:0,duration:.5,stagger:.12,ease:'circ.out'},8.55);
+  tl.to('#s2-world img',{scale:1.035,duration:6,ease:'sine.inOut'},7.9);
+  // Push to scene 3
+  tl.to('#scene2',{x:-1920,duration:.5,ease:'power3.inOut'},14.8);
+  tl.fromTo('#scene3',{x:1920,opacity:1},{x:0,duration:.5,ease:'power3.inOut'},14.8);
+  from('#s3-eye',{y:-30,opacity:0,duration:.4,ease:'expo.out'},15.05);
+  from('#s3-title',{x:-70,opacity:0,duration:.75,ease:'power4.out'},15.2);
+  from('#map1',{y:70,opacity:0,duration:.6,ease:'back.out(1.2)'},15.75);
+  from('#map2',{scale:.9,opacity:0,duration:.5,ease:'circ.out'},15.9);
+  from('#map3',{x:70,opacity:0,duration:.55,ease:'power3.out'},16.05);
+  from('#map1 .bar span',{scaleX:0,transformOrigin:'left',duration:1.1,ease:'expo.out'},16.45);
+  from('#s3-line',{scaleX:0,transformOrigin:'left',duration:.55,ease:'sine.out'},16.7);
+  from('#s3-foot',{y:25,opacity:0,duration:.5,ease:'power2.out'},16.95);
+  tl.to('.map-icon',{y:-8,duration:1.2,stagger:.15,ease:'sine.inOut',yoyo:true,repeat:4},17.5);
+  // Vertical push to trust
+  tl.to('#scene3',{y:-1080,duration:.55,ease:'power3.inOut'},23.1);
+  tl.fromTo('#scene4',{y:1080,opacity:1},{y:0,duration:.55,ease:'power3.inOut'},23.1);
+  from('#s4-eye',{x:-45,opacity:0,duration:.45,ease:'expo.out'},23.4);
+  from('#s4-title',{y:65,opacity:0,duration:.8,ease:'power4.out'},23.55);
+  from('#s4-sub',{x:38,opacity:0,duration:.55,ease:'sine.out'},24.05);
+  from('#s4-shield',{scale:.92,rotation:-2,opacity:0,duration:.75,ease:'back.out(1.2)'},23.6);
+  from('#s4-shield .trust-row',{x:45,opacity:0,duration:.42,stagger:.1,ease:'circ.out'},24.25);
+  tl.to('#scene4 .glow',{x:-90,scale:1.12,duration:6,ease:'sine.inOut'},23.4);
+  // Blur crossfade to vision
+  tl.to('#scene4',{filter:'blur(10px)',scale:1.03,opacity:0,duration:.55,ease:'power2.inOut'},31.0);
+  tl.fromTo('#scene5',{filter:'blur(10px)',scale:.97,opacity:0},{filter:'blur(0px)',scale:1,opacity:1,duration:.55,ease:'power2.inOut'},31.1);
+  from('#s5-eye',{x:-45,opacity:0,duration:.45,ease:'expo.out'},31.45);
+  from('#s5-title',{y:80,opacity:0,duration:.9,ease:'power4.out'},31.6);
+  from('#s5-sub',{x:55,opacity:0,duration:.55,ease:'sine.out'},32.15);
+  from('#s5-thesis span',{scale:.82,opacity:0,duration:.45,stagger:.09,ease:'back.out(1.35)'},32.5);
+  from('#s5-cta',{letterSpacing:'.28em',opacity:0,duration:.7,ease:'circ.out'},33.1);
+  from('#s5-mascot',{x:110,rotation:5,opacity:0,duration:.85,ease:'elastic.out(1,.75)'},32.25);
+  tl.to('#s5-mascot',{y:-12,duration:1.5,ease:'sine.inOut',yoyo:true,repeat:3},34.0);
+  tl.to('#s5-title,#s5-sub,#s5-thesis,#s5-cta,#s5-eye,#s5-mascot',{opacity:0,duration:.7,ease:'power2.in'},39.1);
+  window.__timelines['quant-vc-demo']=tl;
+</script>
+</body>
+</html>

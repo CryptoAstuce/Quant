@@ -1,0 +1,6 @@
+allowBuilds:
+  esbuild: true
+minimumReleaseAgeExclude:
+  - '@wagmi/connectors@8.0.23'
+  - '@wagmi/core@3.6.2'
+  - wagmi@3.7.2
