@@ -21,6 +21,13 @@ export interface ShareCardInput {
   isDemo: boolean
 }
 
+/** Keep value disclosure in one pure function so privacy modes are regression-tested. */
+export function formatShareValue(mode: ShareValueMode, representedHype: number): string {
+  if (mode === 'hidden') return 'hidden'
+  if (mode === 'rounded') return `${formatToken(representedHype, 0)} HYPE (rounded)`
+  return `${formatToken(representedHype, 4)} HYPE`
+}
+
 export async function renderShareCard(input: ShareCardInput): Promise<HTMLCanvasElement> {
   const W = 1200
   const H = 630
@@ -80,13 +87,7 @@ export async function renderShareCard(input: ShareCardInput): Promise<HTMLCanvas
   sy += 36
 
   // values: opt-in only
-  if (input.mode === 'hidden') {
-    stat(ctx, 'Position value', 'hidden', sx, sy)
-  } else if (input.mode === 'rounded') {
-    stat(ctx, 'Represented value', `${formatToken(input.representedHype, 0)} HYPE (rounded)`, sx, sy)
-  } else {
-    stat(ctx, 'Represented value', `${formatToken(input.representedHype, 4)} HYPE`, sx, sy)
-  }
+  stat(ctx, input.mode === 'exact' ? 'Represented value' : 'Position value', formatShareValue(input.mode, input.representedHype), sx, sy)
 
   if (input.isDemo) {
     ctx.fillStyle = '#f2c14e'
