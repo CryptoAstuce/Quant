@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { reportPair, useGame } from './game'
 import type { Snapshot } from '@/lib/types'
 
@@ -46,6 +46,10 @@ describe('device-local snapshot lifecycle', () => {
     vi.stubGlobal('localStorage', storage)
     useGame.getState().bind(`privacy-test-${testKey++}`)
     useGame.getState().deleteAll()
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
   })
 
   it('never records a position before explicit consent', () => {
